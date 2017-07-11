@@ -1,0 +1,166 @@
+---
+layout: post
+comments: true
+title: "sed与正则表达式"
+date: 2013-05-21 18:00
+categories: Shell
+keywords: shell,sed,正则表达式,Linux
+description: sed与正则表达式
+---
+
+今天开始有「组织」地学习一些shell script中的一些工具， 如sed, awk等.
+
+> sed(stream editor) is a Unix utility that parses and transform text. --wikipedia
+
+sed是文本处理中经常用到的工具，对于正则表达式的要求比较高，而正则这一块也是「蓄谋已久」的地方，所以也一并、好好的来学习学习！
+
+### 正则表达式
+
+在我印象中，不同语言对于正则表达式还是有一点不同的，具体到语言的细节之中，不过总体上而言还是基本相同的，比如以下正则中的保留字符：
+
+<table>
+  <tr>
+    <th>标记</th>
+	<th>描述</th>
+  </tr>
+  <tr>
+    <td>^</td>
+	<td>起始标记</td>
+  </tr>
+  <tr>
+    <td>$</td>
+	<td>行尾标记</td>
+  </tr>
+  <tr>
+    <td>.</td>
+	<td>匹配任意字符</td>
+  </tr>
+  <tr>
+    <td>[ ]</td>
+	  <td>匹配在[ ]中的任意一个字符</td>
+  </tr>
+  <tr>
+    <td>[^]</td>
+    <td>匹配除在[^]之外的任意一个字符</td>
+  </tr>
+  <tr>
+    <td>[-]</td>
+    <td>匹配[]中制定范围内的任意一个字符</td>
+  </tr>
+  <tr>
+    <td>?</td>
+    <td>匹配之前的项1次或者0次</td>
+  </tr>
+  <tr>
+    <td>+</td>
+    <td>匹配之前的项1次或者多次</td>
+  </tr>
+  <tr>
+    <td>*</td>
+    <td>匹配之前的项0次或者多次</td>
+  </tr>
+  <tr>
+    <td>( )</td>
+    <td>创建一个用于匹配的字串</td>
+  </tr>
+  <tr>
+    <td>{n}</td>
+    <td>匹配之前的项n次</td>
+  </tr>
+  <tr>
+    <td>{n,}</td>
+    <td>之前的项至少需要匹配n次</td>
+  </tr>
+  <tr>
+    <td>{n, m}</td>
+    <td>指定之前的项所必需匹配的最小和最大次数</td>
+  </tr>
+  <tr>
+    <td>|</td>
+    <td>匹配|两边的任意一项</td>
+  </tr>
+  <tr>
+    <td>/</td>
+    <td>对上述字符进行转义</td>
+  </tr>
+</table>
+
+还是从几个示例中来学习一下正则表达式。
+
+匹配邮件地址:
+
+    [a-z0-9_]+@[a-z0-9]+\.[a-z]+
+
+- [a-z0-9_]+  匹配@前用字母、数字和下划线组成的1项或者多项字符串
+- @没有任何正则处理，所以就匹配其本身
+- [a-z0-9]+\.[a-z]+ 匹配@后的域名，\.对.进行转义，表示它就是一个.而不是「匹配任意一个字符」
+
+匹配IP地址:
+
+	[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}
+
+- [0-9]{1, 3}匹配0-9中1位或者3位数字
+
+### 使用sed处理文本
+
+使用sed最常用的一件事就是对给定文本中的字符串进行替换(使用s命令):
+This is your dog
+    $ sed 's/pattern/replace_string/' file_name
+
+比如：
+
+    $ echo hello world | sed 's/hello/HELLO/'
+	HELLO world
+
+这是最简单的形式(从echo的结果中进行字符串替换).
+
+    $ echo hello world hello | sed 's/hello/HELLO/'
+	HELLO world hello
+
+要匹配第n个，则可以在命令尾部加上加上参数n(如，`sed 's/hello/HELLO/1`);
+要匹配一行中所有匹配项，则要再命令尾部加上参数g(`sed 's/hello/HELLO/g`).  
+
+`s`命令还有一个参数是放在`s`之前的，如：
+
+    # 替换第2行文本中的hello
+    $ sed '2s/hello/HELLO/g' file
+	# 替换第3～5行文本中的hello
+	$ sed '3,5s/hello/HELLO/g' file
+
+当然，使用sed并不能改变文件中的内容，所以需要用`>`或者添加参数`-i`.
+
+    $ sed 's/hello/HELLO/g' file > file_new
+	# 或者
+	$ sed -i 's/hello/HELLO/g' file
+
+将行首的空格或者tab删除:
+
+    $ sed 's/^[ \t]*//g' file
+
+在行首添加空格(感觉用md写的文章特别需要这个):
+
+    $ sed 's/^/  /g' file
+
+使用`sed`还可以「模拟」很多`shell`中的命令:
+
+**head**
+
+    # 显示file中的前四行
+    head -n 4 file
+	# 使用sed
+	sed 4q file
+
+**tail**
+
+    # 显示file中的最后四行
+	tail -n 4 file
+	# 使用sed(这个有点难理解)
+	sed -e :a -e '$q;N;5,$D;ba' file
+
+更多有关sed的内容可以参考其man page:
+
+    man sed
+
+还有一个不错的参考资源是[单行sed脚本快速参考](http://sed.sourceforge.net/sed1line_zh-CN.html)，里面包含了很多的实例，相信能在里面找到大多数你想要`sed`做到的事情.
+
+--EOF--

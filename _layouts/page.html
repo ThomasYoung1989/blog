@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include head.html %}
+</head>
+<body>
+<header class="post-nav">
+    <a href="/" class="brand">Fantasy</a>
+    <a href="/about" class="link">About</a>
+    <a href="/archive" class="link">Archive</a>
+    <a href="/categories" class="link">Category</a>
+</header>
+<div class="page-content">
+  <h1>{{ page.title }}</h1>
+  {{ content }}
+</div>
+{% if page.comments %}
+  <div class="page-comment">
+    {% include comments.md %}
+  </div>
+{% endif %}
+{% include footer.html %}
+</body>
+</html>
