@@ -2,15 +2,13 @@
 root: /
 permalink: /:categories/:year/:month/:day/:title/
 paginate: 10
-title: Blog | Fantasy
-description: A blog on programming, learning and reading.
+title: Blog | Young
+description: Too Young Too Simple
 author: Fantasy Shao
-email: fantasyshao@icloud.com
-subscribe_rss: /atom.xml
-license: true
+email: 934619960@qq.com
 category_list: true
 links: true
-address: http://blog.fantasy.codes
-url: http://blog.fantasy.codes
+address: https://thomasyoung1989.github.io/blog/
+url: https://thomasyoung1989.github.io/blog/
 gems: [jekyll-paginate]
 theme: jekyll-theme-minimal

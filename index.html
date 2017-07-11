@@ -1,15 +1,15 @@
 ---
 layout: template
-title: Blog - Fantasy Shao
-keywords: Blog, fantasyshao, front-end, Node.js, React, iOS, Mac
-description: The blog of fantasyshao, programming, learning and reading.
+title: Blog - Thomas Young
+keywords: Blog, Thomas ,  Node.js, React, JAVA, Python,AI
+description: technology is future
 ---
 
 <div class="articles">
     {% for post in paginator.posts %}
     <article class="article" itemscope itemtype="http://schema.org/BlogPosting" role="article">
         <h2 itemprop="name" class="title">
-            <a href="{{ post.url }}" itemprop="url">{{ post.title }}</a>
+            <a href="blog/{{ post.url }}" itemprop="url">{{ post.title }}</a>
         </h2>
         <div class="info">
             <time datetime="{{ post.date | date_to_long_string }}">{{ post.date | date_to_long_string }}</time>
