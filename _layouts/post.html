@@ -16,7 +16,7 @@
             <span>{{ page.date | date: '%Y' }}</span>
         </date>, Category:
         {% for cat in page.categories %}
-            <a href="/categories#{{ cat }}-ref" title="{{ cat }}" rel="category tag">{{ cat }}</a>
+            <a href="https://thomasyoung1989.github.io/blog/categories#{{ cat }}-ref" title="{{ cat }}" rel="category tag">{{ cat }}</a>
         {% endfor %}
     </div>
     <div class="article-content" itemprop="articleBody">
@@ -25,10 +25,10 @@
 </section>
 <nav class="post-pagination">
   {% if page.previous %}
-    <a href="{{ page.previous.url }}" rel="prev" title="{{ page.previous.title }}">&larr; Previous：《{{ page.previous.title }}》</a>
+    <a href="https://thomasyoung1989.github.io/blog{{ page.previous.url }}" rel="prev" title="https://thomasyoung1989.github.io/blog{{ page.previous.title }}">&larr; Previous：《{{ page.previous.title }}》</a>
   {% endif %}
   {% if page.next %}
-    <a href="{{ page.next.url }}" rel="next" title="{{ page.next.title }}">Next：《{{ page.next.title }}》&rarr;</a>
+    <a href="https://thomasyoung1989.github.io/blog{{ page.next.url }}" rel="next" title="{{ page.next.title }}">Next：《{{ page.next.title }}》&rarr;</a>
   {% endif %}
 </nav>
 <div class="post-bottom-area">
