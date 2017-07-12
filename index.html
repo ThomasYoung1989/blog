@@ -14,7 +14,7 @@ description: technology is future
         <div class="info">
             <time datetime="{{ post.date | date_to_long_string }}">{{ post.date | date_to_long_string }}</time>
             {% for cat in post.categories %}
-              <a href="/categories#{{ cat }}-ref" title="{{ cat }}" rel="category">{{ cat }}</a>
+              <a href="https://thomasyoung1989.github.io/blog/categories#{{ cat }}-ref" title="{{ cat }}" rel="category">{{ cat }}</a>
             {% endfor %}
         </div>
         <p itemprop="description" class="desc">{{ post.content | strip_html | truncatewords: 30 }}</p>
