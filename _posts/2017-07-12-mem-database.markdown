@@ -59,42 +59,29 @@ categories: database
 ## 附录：查询时间实测
 
 SQL1（2万条数据聚合）：
-```sql
+
 select sum(pepole_nums) as aabb,start_province_name as bbaa from ol_itf_nbd_tourist_info where (start_date>='2017-04-16' and start_date<='2017-05-16') and (target_province_name in('西藏','河北','新疆','台湾','四川','陕西','山西','上海','山东','青海','澳门','宁夏','内蒙古','吉林','江西','安徽','江苏','北京','湖南','重庆','福建','湖北','甘肃','香港','河南','广东','浙江','广西','云南','黑龙江','贵州','海南','辽宁'))  group by start_province_name order by sum(pepole_nums) desc
-```
 
 SQL2（142万条数据聚合）：
-```sql
+
 select sum(pepole_nums) as aabb,start_province_name as bbaa from ol_itf_nbd_tourist_info where (start_date>='2016-04-16' and start_date<='2017-05-16') and (target_province_name in('西藏','河北','新疆','台湾','四川','陕西','山西','上海','山东','青海','澳门','宁夏','内蒙古','吉林','江西','安徽','江苏','北京','湖南','重庆','福建','湖北','甘肃','香港','河南','广东','浙江','广西','云南','黑龙江','贵州','海南','辽宁'))  group by start_province_name order by sum(pepole_nums) desc
-```
 
 SQL3（210万条数据聚合）：
-```sql
+
 select sum(pepole_nums) as aabb,start_province_name as bbaa from ol_itf_nbd_tourist_info where (start_date>='2010-04-16' and start_date<='2017-05-16') and (target_province_name in('西藏','河北','新疆','台湾','四川','陕西','山西','上海','山东','青海','澳门','宁夏','内蒙古','吉林','江西','安徽','江苏','北京','湖南','重庆','福建','湖北','甘肃','香港','河南','广东','浙江','广西','云南','黑龙江','贵州','海南','辽宁'))  group by start_province_name order by sum(pepole_nums) desc
-```            
-- Mysql
-数据总量 2782699
-是否使用索引 是
-占用内存 未知
-SQL1执行平均耗时 3s
-SQL2执行平均耗时 3.3s
-SQL3执行平均耗时 3.8s
 
-- Derby	 
-数据总量 2782699
-是否使用索引 是
-占用内存 1.6G 
-SQL1执行平均耗时 0.9s
-SQL2执行平均耗时 1.7s
-SQL3执行平均耗时 2.2s 
 
-- Mongodb
-数据总量 2782699
-是否使用索引 是
-占用内存 1.2G
-SQL1执行平均耗时 0.3s
-SQL2执行平均耗时 3.3s
-SQL3执行平均耗时 4.8s
+```sql             
+                Mysql     Derby	  Mongodb
+数据总量	    2782699   2782699  2782699
+是否使用索引      是         是	      是
+占用内存	      未知      1.6G     1.2G
+SQL1执行平均耗时	 3s	      0.9s	   0.3s
+SQL2执行平均耗时	 3.3s     1.7s	   3.3s
+SQL3执行平均耗时	 3.8s     2.2s	   4.8s
+
+```
+
 
 
 
