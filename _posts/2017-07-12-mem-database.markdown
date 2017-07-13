@@ -76,7 +76,7 @@ select sum(pepole_nums) as aabb,start_province_name as bbaa from ol_itf_nbd_tour
 数据总量        2782699   2782699  2782699
 是否使用索引      是         是	      是
 占用内存         未知       1.6G     1.2G
-SQL1执行平均耗时   3s	      0.9s	   0.3s
+SQL1执行平均耗时   3s       0.9s     0.3s
 SQL2执行平均耗时   3.3s     1.7s     3.3s
 SQL3执行平均耗时   3.8s     2.2s     4.8s
 
