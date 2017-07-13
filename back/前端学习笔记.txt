@@ -1,0 +1,50 @@
+1.spa(single page application)应用：angular,vue,react
+  angular：
+  UI组件：bootstrap
+  语言：typescript(支持注解,强类型检查)
+  技术：template模板语言，绑定数据模型，注解式声明，双向数据绑定
+  
+  react(facebook,instgrame):
+  UI组件：antd
+  语言：jsx
+  技术：框架多，需借助框架更好的使用:redux，dva
+  
+  vue(国产)：未研究过
+  UI组件：
+  
+2.spa进化至ssr(server side render，对seo友好):借助node作为中间层服务器，需借助express，koa等node服务端技术
+  demo:
+	  vue:https://github.com/beauty-enjoy/beauty
+	  react：https://github.com/ibufu/douban-movie-react-ssr
+  
+3.node服务端技术栈：
+  pm2：node服务管理和运维平台
+  express：成熟的服务端平台 （MEAN:mongo,express,angular,nodejs）
+  koa2：新的服务端平台
+  alinode：阿里的node服务监控平台
+  
+4.nodejs的优势：
+
+
+5.渐进式web应用开发，替代传统原生app应用，借助service workers技术：
+	安全 – 通过 HTTPS 来提供服务来防止网络窥探，保证内容不被篡改。
+	渐进式 – 能够让每一位用户使用，无论用户使用什么浏览器，因为它是始终以渐进增强为原则
+	响应式 – 适应任何环境：桌面电脑、智能手机、平板电脑，或者其他设备。
+	不依赖网络连接 – 通过用 service workers 增强，可以在离线或者低质量网络下工作
+	类原生应用 – 有像原生应用般的交互和导航给用户原生应用般的体验，因为它是建立在 app shell model 上的。
+	持续更新 – 受益于 service worker 的更新进程，应用能够始终保持更新。
+	可发现 – 可识别为“应用程序”，是得益于 W3C manifests 元数据和 service worker 的登记，让搜索引擎能够找到 web 应用。
+	可再次访问 – 通过推送通知等特性让用户再次访问变得容易。
+	可安装 – 允许用户保留对他们有用的应用在主屏幕上，不需要通过应用商店。
+	可链接 – 通过 URL 可以轻松分享应用，不用复杂的安装即可运行。
+
+
+6.nodejs基础知识：
+  package.js
+  
+  
+  webpack.config.js
+  
+
+7.js单线程模型：栈，任务队列，eventLoop
+  浏览器多线程：1.ui渲染 2.js执行引擎 3.事件监听 
