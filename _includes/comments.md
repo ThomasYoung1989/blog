@@ -1,36 +1,17 @@
 <div>
-	<ul style="list-style: none; margin: 0; padding: 0;">
-		<li>
-			<h4 style="font-size: 16px; color: #666; margin: 0; font-weight: normal;">多说 Duoshuo</h4>
-			<!-- 多说评论框 start -->
-			<div class="ds-thread" data-thread-key="{{ page.title }}" data-title="{{ page.title }}" data-url="{{ page.url }}"></div>
-			<!-- 多说评论框 end -->
-			<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-			<script type="text/javascript">
-			var duoshuoQuery = {short_name:"fantasyshao"};
-				(function() {
-					var ds = document.createElement('script');
-					ds.type = 'text/javascript';ds.async = true;
-					ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-					ds.charset = 'UTF-8';
-					(document.getElementsByTagName('head')[0]
-					 || document.getElementsByTagName('body')[0]).appendChild(ds);
-				})();
-				</script>
-			<!-- 多说公共JS代码 end -->
-		</li>
-		<li>
-			<h4 style="font-size: 16px; color: #666; margin: 0; font-weight: normal;">Disqus</h4>
-			<div id="disqus_thread"></div>
-			<script type="text/javascript">
-				var disqus_shortname = '027';
-			  (function() {
-			      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-			      dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-			      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-			  })();
-			</script>
-			<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-		</li>
-	</ul>
+<div id="SOHUCS" sid="{{ page.title }}"></div>
+	<script>
+			(function(){
+				var appid = 'cyt6TR3lx',
+				conf = '72ea2e2fb621dd7e758540195f95dabe';
+				var doc = document,
+				s = doc.createElement('script'),
+				h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+				s.type = 'text/javascript';
+				s.charset = 'utf-8';
+				s.src =  'http://assets.changyan.sohu.com/upload/changyan.js?conf='+ conf +'&appid=' + appid;
+				h.insertBefore(s,h.firstChild);
+				window.SCS_NO_IFRAME = true;
+			})()
+		</script>
 </div>
