@@ -8,7 +8,7 @@ author: Fantasy Shao
 email: 934619960@qq.com
 category_list: true
 links: true
-address: https://thomasyoung1989.github.io/blog/
-url: https://thomasyoung1989.github.io/blog/
+address: http://www.thomasyoung.cn
+url: http://www.thomasyoung.cn
 gems: [jekyll-paginate]
 theme: jekyll-theme-minimal

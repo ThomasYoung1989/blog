@@ -9,12 +9,12 @@ description: technology is future
     {% for post in paginator.posts %}
     <article class="article" itemscope itemtype="http://schema.org/BlogPosting" role="article">
         <h2 itemprop="name" class="title">
-            <a href="https://thomasyoung1989.github.io/blog{{ post.url }}" itemprop="url">{{ post.title }}</a>
+            <a href="{{ post.url }}" itemprop="url">{{ post.title }}</a>
         </h2>
         <div class="info">
             <time datetime="{{ post.date | date_to_long_string }}">{{ post.date | date_to_long_string }}</time>
             {% for cat in post.categories %}
-              <a href="https://thomasyoung1989.github.io/blog/categories#{{ cat }}-ref" title="{{ cat }}" rel="category">{{ cat }}</a>
+              <a href="/categories#{{ cat }}-ref" title="{{ cat }}" rel="category">{{ cat }}</a>
             {% endfor %}
         </div>
         <p itemprop="description" class="desc">{{ post.content | strip_html | truncatewords: 30 }}</p>
@@ -26,12 +26,12 @@ description: technology is future
             {% if paginator.page == 2 %}
                 <a class="newer-posts" href="/">&larr; Newer</a>
             {% else %}
-                <a class="newer-posts" href="https://thomasyoung1989.github.io/blog/page{{paginator.previous_page}}">&rarr; Newer</a>
+                <a class="newer-posts" href="/page{{paginator.previous_page}}">&rarr; Newer</a>
             {% endif %}
         {% endif %}
         <span class="page-number">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
         {% if paginator.next_page %}
-            <a class="older-posts" href="https://thomasyoung1989.github.io/blog/page{{paginator.next_page}}">Older &rarr;</a>
+            <a class="older-posts" href="/page{{paginator.next_page}}">Older &rarr;</a>
         {% endif %}
     </nav>
 </div>
