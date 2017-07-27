@@ -22,35 +22,37 @@ categories: fontend
 
 直到后来nodejs的发展，前端真是进入了空前的繁荣时代，各种框架层出不穷，写法推陈出新，样式多变。其中以spa框架发展最甚，我简单调研了下当前的几个spa框架，罗列了下他们的一些生态，自己记录下：
 
-- angular：
-UI组件：bootstrap
-语言：typescript(支持注解,强类型检查)
-技术：template模板语言，绑定数据模型，注解式声明，双向数据绑定
+* angular：
 
-- react(facebook,instgrame):
-UI组件：antd
-语言：jsx
-技术：框架多，需借助框架更好的使用:redux，dva
+  * UI组件：bootstrap
+  * 语言：typescript(支持注解,强类型检查)
+  * 技术：template模板语言，绑定数据模型，注解式声明，双向数据绑定
 
-- vue(国产)：未研究过
-UI组件：
+* react(facebook,instgrame):
 
+  * UI组件：antd
+  * 语言：jsx
+  * 技术：框架多，需借助框架更好的使用:redux，dva
+
+* vue(国产)：未研究过
 
 spa发展到一定程度，大家发现一个问题，它对于seo不够友好，源代码里面什么数据都没有，只是一个空架子，不利于爬虫去爬。所以现在又有了一个新的潮流，叫ssr(server side render)-服务端渲染:借助node作为中间层服务器，通过express、koa等node服务端技术，在服务端渲染好页面，然后再传到前台，下面列了两个别人的demo，使用同样的技术栈，spa摇身一变对seo也友好了：
-- vue:https://github.com/beauty-enjoy/beauty
-- react：https://github.com/ibufu/douban-movie-react-ssr
+
+* vue:[https://github.com/beauty-enjoy/beauty](https://github.com/beauty-enjoy/beauty)
+* react：[https://github.com/ibufu/douban-movie-react-ssr](https://github.com/ibufu/douban-movie-react-ssr)
 
 spa后来又衍生出来一个新的概念，这个概念比较新，应该出来不久，叫渐进式web应用开发，因为spa应用的最大特点及时第一次加载的时候所有的资源都会下载到本地，后期只做数据的交互没有页面的跳转和其他资源请求，这跟传统的移动端app是不是很像，所以渐进式web应用开发就是为了替代传统原生app应用而出现的，它有什么特点呢：
-- 安全 – 通过 HTTPS 来提供服务来防止网络窥探，保证内容不被篡改。
-- 渐进式 – 能够让每一位用户使用，无论用户使用什么浏览器，因为它是始终以渐进增强为原则
-- 响应式 – 适应任何环境：桌面电脑、智能手机、平板电脑，或者其他设备。
-- 不依赖网络连接 – 通过用 service workers 增强，可以在离线或者低质量网络下工作
-- 类原生应用 – 有像原生应用般的交互和导航给用户原生应用般的体验，因为它是建立在 app shell model 上的。
-- 持续更新 – 受益于 service worker 的更新进程，应用能够始终保持更新。
-- 可发现 – 可识别为“应用程序”，是得益于 W3C manifests 元数据和 service worker 的登记，让搜索引擎能够找到 web 应用。
-- 可再次访问 – 通过推送通知等特性让用户再次访问变得容易。
-- 可安装 – 允许用户保留对他们有用的应用在主屏幕上，不需要通过应用商店。
-- 可链接 – 通过 URL 可以轻松分享应用，不用复杂的安装即可运行。
+
+* 安全 – 通过 HTTPS 来提供服务来防止网络窥探，保证内容不被篡改。
+* 渐进式 – 能够让每一位用户使用，无论用户使用什么浏览器，因为它是始终以渐进增强为原则
+* 响应式 – 适应任何环境：桌面电脑、智能手机、平板电脑，或者其他设备。
+* 不依赖网络连接 – 通过用 service workers 增强，可以在离线或者低质量网络下工作
+* 类原生应用 – 有像原生应用般的交互和导航给用户原生应用般的体验，因为它是建立在 app shell model 上的。
+* 持续更新 – 受益于 service worker 的更新进程，应用能够始终保持更新。
+* 可发现 – 可识别为“应用程序”，是得益于 W3C manifests 元数据和 service worker 的登记，让搜索引擎能够找到 web 应用。
+* 可再次访问 – 通过推送通知等特性让用户再次访问变得容易。
+* 可安装 – 允许用户保留对他们有用的应用在主屏幕上，不需要通过应用商店。
+* 可链接 – 通过 URL 可以轻松分享应用，不用复杂的安装即可运行。
 
 看完它的特点，是不是一拍大腿，以后还装什么app啊。确实，传统app的推广费用越来越高，用户下载安装的热情越来越小，让你收藏一个网站用户的时间成本更小，所以优势很明显，后面大家要跟上潮流啊。
 
