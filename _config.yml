@@ -4,7 +4,7 @@ permalink: /:categories/:year/:month/:day/:title/
 paginate: 10
 title: Blog | Young
 description: Too Young Too Simple
-author: Fantasy Shao
+author: Thomas Young
 email: 934619960@qq.com
 category_list: true
 links: true
