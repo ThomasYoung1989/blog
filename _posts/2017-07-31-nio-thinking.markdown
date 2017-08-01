@@ -49,4 +49,4 @@ int bytesRead = socketChannel.read(buf);
 
 但是这种非阻塞模式下，每次都要再次判断状态不是很烦么？所以一般的网络NIO都是跟Selector配合使用，将状态监听的任务交给Selector；文件IO没有非阻塞模式，自然也不能用Selector；具体代码我就不贴了，大家应该都能百度到；
 
-那到底什么时候使用nio呢。这个问题有篇文章讲的很好，大家可以去看下：(http://ifeve.com/java-nio-vs-io/)[http://ifeve.com/java-nio-vs-io/]
+那到底什么时候使用nio呢。这个问题有篇文章讲的很好，大家可以去看下：[http://ifeve.com/java-nio-vs-io/](http://ifeve.com/java-nio-vs-io/)
