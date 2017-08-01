@@ -3,7 +3,7 @@ layout: post
 title: "nodejs server的性能测试分析"
 date: 2017-07-27 15:22
 comments: true
-categories: nodejs,server
+categories: nodejs
 ---
 
 nodejs作为服务端server的方案已经出来很多年了，各家公司也提供了一些最佳实践的方案，但是由于一直做传统项目，使用java企业级方案更多，很少涉及互联网项目，在实际项目中一直没有机会去实践，而自己对于nodejs到底有怎样的性能优势一直很好奇。最近正好有时间，就借此机会对nodejs的server做了一次简单的压测，跟tomcat做了一下对比。
