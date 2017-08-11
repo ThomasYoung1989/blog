@@ -80,9 +80,9 @@ StringRedisSerialize //序列化成字符串
 我们在redis中存的最多的就是Pojo对象了，这些对象有清晰的结构，如果使用json序列化方案的话，在redis中以json字符串的形式存储，可读性很高。但是如果保存基本数据类型的话，就不太合适了，比如我要存一个字符串"0"，如果使用json序列化方法，在redis中存放的结构会是："\"0\"",其实直接存"0"才是合理的，而json为了将其存成一个json对象，又加了一层引号，显得多此一举。这还会造成一个问题：如果对此键进行increase操作，将会直接报错，因为redis不能将其转成一个int值。这种问题有两种解决方案：
 
 1. 如果存的时候存的就是数字0，那json包装后会是"0",这样的格式也是对的。
-1. 使用StringRedisSerialize，不管你存字符串"0"还是数字0，那我们存在库中的就是"0",后续做increase也是没有问题的。
+1. 使用StringRedisSerialize，那我们存在库中的就是"0",后续做increase也是没有问题的。
 
-如果用JdkSerializationRedisSerializer序列化呢，答案是同样不行，jdk序列化会将这个0序列化成一个只有jdk自己认识的字节码，导致increase无法执行。所以在做int,long,string啊这些基础数据类型的存储时，我推荐还是直接用string序列化方式，因为redis内部只支持string类型，这些基础类型其实都会存成string类型，用string序列化方式正好契合redis的要求。博主就曾经碰过这个坑，当时明明存进去一个"0"，用它做计数器做increase时就死活不行，最后发现时序列化搞的鬼。
+如果用JdkSerializationRedisSerializer序列化呢，答案是同样不行，jdk序列化会将这个0序列化成一个只有jdk自己认识的字节码，导致increase无法执行。注意以上两个方案是互斥的，就是要么改成数字，要么改成String序列化，同时修改的话，会报Integer不能转换成String类型的错误，就是使用String序列化不能操作long和int类型的值，这点大家要注意。
 
 * 执行lua脚本并传参数时，序列化同样会起作用
 
@@ -112,7 +112,7 @@ StringRedisSerialize //序列化成字符串
 redis.clients.jedis.exceptions.JedisDataException: ERR Error running script (call to f_805244dd6d5f8aa92576c2ea0d5f137412a54aa5): @user_script:1: ERR value is not an integer or out of range
 ```
 
-这问题跟上面一样同样有两种解决方式:
+这问题跟上面的解决方案一样:
 
 1. 直接传数字1作为参数
 1. 使用StringRedisSerialize作为序列化方案
