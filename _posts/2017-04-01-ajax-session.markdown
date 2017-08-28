@@ -136,6 +136,7 @@ $.ajax({
     url:url,
     //跨域支持 begin
     xhrFields: {
+        //携带cookie
         withCredentials: true
     },
     crossDomain: true,
@@ -146,3 +147,9 @@ $.ajax({
     }
 });
 ```
+
+##扩展
+
+Spring 5对cors提供了支持，也提供了更友好的api，具体可参考此博客
+
+[https://ifeve.com/%E3%80%8Aspring-5-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E3%80%8B20-cors-%E6%94%AF%E6%8C%81/#more-33240](https://ifeve.com/%E3%80%8Aspring-5-%E5%AE%98%E6%96%B9%E6%96%87%E6%A1%A3%E3%80%8B20-cors-%E6%94%AF%E6%8C%81/#more-33240)
