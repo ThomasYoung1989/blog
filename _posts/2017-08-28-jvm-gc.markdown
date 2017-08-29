@@ -10,13 +10,17 @@ categories: cache
 
 java有很多类型的内存溢出，但是很多类型我们日常碰到的概率都很小，有些碰到的概率较大。每种溢出都有调节配置规避的方法。但是首先我们要熟悉java的内存模型和不同区域存放哪些东西，这样更有利于我们查找原因。说到传统的内存模型，有一个很经典的图片：
 
+图1
 <img src="http://my.csdn.net/uploads/201205/05/1336185361_6442.png" style="margin:0px 10px;">
 
-此处的内存被分为堆区和perm区，堆区中又分为老年代和年轻代。其实这个图漏了一些java的内存区，下面这张图才是最全的内存分区:
+此处的内存被分为堆区和perm区，堆区中又分为老年代和年轻代。还有一种逻辑概念的分区:
 
+图2
 <img src="http://s5.sinaimg.cn/large/002RSgYjgy70Bv9xr9Ob4&690" style="margin:0px 10px;">
 
-这个图基本将所有的内存都列出来了，后面的内存溢出我将主要围绕上面两个图来讲；
+图2中的方法区其实是个分区的逻辑概念，如果跟上图对应的话，它实际存在perm区中。后期perm区被废弃掉后，方法区被移到了堆中，但是在逻辑上，他们还是会作为两个概念来讨论；
+程序计数器（program counter register）只占用了一块比较小的内存空间，至于小到什么程度呢，这样说吧，有时可以忽略不计的。程序计数器是每个线程私有的,这个内存区域是唯一一个在java虚拟机规范中没有规定任何OutOfMemoryError的情况的区域。
+本地方法栈是个特殊的栈，是java调用本地native方法时创建的栈，具体可以参考此链接[http://www.cnblogs.com/wade-luffy/p/5813747.html](http://www.cnblogs.com/wade-luffy/p/5813747.html)
 
 ## 常见的几种溢出
 
@@ -41,15 +45,15 @@ java有很多类型的内存溢出，但是很多类型我们日常碰到的概�
 ### perm 区内存溢出 java.lang.OutOfMemoryError: PermGen space
 
 perm区也是大家比较容易碰到的溢出问题，特别是jsp盛行的年代，我们知道jsp文件都会被编译成servlet，这个compile会产生很多的class，而且一般jsp文件还都不小，很多人喜欢把大把大把的代码全都写在jsp里面，带来的是编译过的servlet也很大。perm是永久代，很大的一部分是用来存这些class的。引入的lib过多，jsp文件过多等都会因为class过多，进而造成perm内存溢出。perm区的内存可以通过参数配置进行设置。
-好消息是，perm区即将成为历史。java1.8已经将其移到了Metaspace，metaspace是在本地内存中分配空间的，只受本地内存空间限制，所以说这就很大很大啦，但是也不排除会出现metaspace溢出啦！！
+好消息是，perm区即将成为历史。java1.7后已移到堆中，java1.8已经将其移到了Metaspace，metaspace是在本地内存中分配空间的，只受本地内存空间限制，所以说这就很大很大啦，但是也不排除会出现metaspace溢出啦！！
 
-###  外部内存溢出 java.lang.OutOfMemoryError: Direct buffer memory 
+###  外部内存溢出 java.lang.OutOfMemoryError: Direct buffer memory
 
 外部内存是个只有nio场景下才会使用的内存，因为操作系统为每个进程都有内存分配的限制，jvm已经占用了进程的大多数份额的情况下，在nio中direct buffer能申请的内存就比较少了，一旦超出了限制自然就会溢出。我们有参数-XX:MaxDirectMemorySize可以扩大DirectMemory的份额，对于nio使用较多的地方，可以适当调大。并且要做好跟堆内存之间的平衡，毕竟达到进程最大可用内存，再怎么申请也是没用的。网友还有一个提示：-XX:+DisableExplicitGC会是System.gc()失效，所以不能设置此参数，在申请DirectMemory前手动gc来获取尽可能多的内存分配。
 
 ### gc开销超出限制 java.lang.OutOfMemoryError: GC overhead limit exceeded
 
-这是Hotspot VM 1.6定义的一个策略，通过统计GC时间来预测是否要OOM了，提前抛出异常，防止OOM发生；Sun 官方对此的定义是：“并行/并发回收器在GC回收时间过长时会抛出OutOfMemroyError。过长的定义是，超过98%的时间用来做GC并且回收了不到2%的堆内存。用来避免内存过小造成应用不能正常工作。“ 这是个一个前期预警，就是提示用户我怎么gc也产生不了空闲空间供你使用啦，试了很多次都不行啦，你放弃吧！！！
+这是Hotspot VM 1.6定义的一个策略，通过统计GC时间来预测是否要OOM了，提前抛出异常，防止OOM发生；Sun 官方对此的定义是：“并行/并发回收器在GC回收时间过长时会抛出OutOfMemroyError。过长的定义是，超过98%的时间用来做GC并且回收了不到2%的堆内存。用来避免内存过小造成应用不能正常工作。“ 这是个一个前期预警，就是提示用户我怎么gc也产生不了空闲空间供你使用啦，试了很多次都不行啦，你放弃吧！！！但是这个跟溢出其实一样的意思，我在测试的时候发现一段代码有时候报GC overhead limit exceeded的错误，有时候也可能报Java heap space溢出的错误，所以这两个错误发生的原因应该是相似的。
 
 ## 总结
 
