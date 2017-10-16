@@ -16,7 +16,7 @@ java有很多类型的内存溢出，但是很多类型我们日常碰到的概�
 此处的内存被分为堆区和perm区，堆区中又分为老年代和年轻代。还有一种逻辑概念的分区:
 
 图2
-<img src="http://s5.sinaimg.cn/large/002RSgYjgy70Bv9xr9Ob4&690" style="margin:0px 10px;">
+<img src="http://www.thomasyoung.cn/media/img/002RSgYjgy70Bv9xr9Ob4&690.jpg" style="margin:0px 10px;">
 
 图2中的方法区其实是个分区的逻辑概念，如果跟上图对应的话，它实际存在perm区中。后期perm区被废弃掉后，方法区被移到了堆中，但是在逻辑上，他们还是会作为两个概念来讨论；
 程序计数器（program counter register）只占用了一块比较小的内存空间，至于小到什么程度呢，这样说吧，有时可以忽略不计的。程序计数器是每个线程私有的,这个内存区域是唯一一个在java虚拟机规范中没有规定任何OutOfMemoryError的情况的区域。
